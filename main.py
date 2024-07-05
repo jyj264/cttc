@@ -1,22 +1,29 @@
 import streamlit as st
+import datetime as dt
 st.title("⏲️中国理论时间计算器")
+h=int(dt.datetime.utcnow().strftime("%H"))
+m=int(dt.datetime.utcnow().strftime("%M"))
+s=int(dt.datetime.utcnow().strftime("%S"))
+if h < 10:
+    h = "0" + str(h)
+if m < 10:
+    m = "0" + str(m)
+if s < 10:
+    s = "0" + str(s)
+st.write("当前UTC时间：",str(h),":",str(m),":",str(s))
+st.write("当前北京时间：",str(int(h)+8),":",str(m),":",str(s))
+h=int(h)
+m=int(m)
+st.markdown("---")
 a=st.text_input("请输入您所在地区的经度：")
-k= st.time_input('请输入当前的北京时间：', value=None)
-k=str(k)
+
+b=0
+
 if a!="":
     try:
         a=int(a)
     except ValueError:
         st.error("请输入-180~180之间的整数！")
-
-if k!="None":
-    c=k.split(":")
-    h=int(c[0])
-    m=int(c[1])
-
-b=116
-
-if st.button("转换"):
     try:
         if a>=b:
             jl=a-b
@@ -49,7 +56,7 @@ if st.button("转换"):
             ansh="0"+str(ansh)
         if ansm < 10:
             ansm = "0" + str(ansm)
-        res="当地理论时间  "+str(ansh)+":"+str(ansm)
+        res="当地理论时间  "+str(ansh)+":"+str(ansm)+":"+str(s)
         st.info(res)
     except TypeError:
         st.error("请输入正确的数字！")
