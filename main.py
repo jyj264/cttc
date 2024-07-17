@@ -9,7 +9,7 @@ if h < 10: h = "0" + str(h)
 if m < 10: m = "0" + str(m)
 if s < 10: s = "0" + str(s)
 st.write("当前UTC时间：", str(h), ":", str(m), ":", str(s))
-st.write("当前北京时间：", str(int(h) + 8), ":", str(m), ":", str(s))
+st.write("当前北京时间：", str((int(h) + 8) % 24), ":", str(m), ":", str(s))
 h = int(h)
 m = int(m)
 st.markdown("---")
@@ -26,7 +26,7 @@ if a != "":
         jlm = int(jlsj % 60)
         ansh = h + jlh if flag else h - jlh
         ansm = (m + jlm) % 60
-        ansh = "0" + str(ansh) if ansh < 10 else str(ansh)
+        ansh = "0" + str(ansh % 24) if ansh < 10 else str(ansh % 24)
         ansm = "0" + str(ansm) if ansm < 10 else str(ansm)
         res = "当地理论时间  " + str(ansh) + ":" + str(ansm) + ":" + str(s)
         st.info(res)
