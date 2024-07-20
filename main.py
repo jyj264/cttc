@@ -42,3 +42,4 @@ if a != "":
         st.error("请输入-180~180之间的整数！")
     except TypeError:
         st.error("请输入正确的数字！")
+
